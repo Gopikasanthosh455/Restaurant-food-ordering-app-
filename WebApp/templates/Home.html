@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Fruitkha</title>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+	<!-- animate css -->
+	<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="{% static 'assets/css/meanmenu.min.css' %}">
+	<!-- main style -->
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+	<!-- responsive -->
+	<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+
+</head>
+<body>
+
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+<!--						<div class="site-logo">-->
+<!--							<a href="{%url 'home_page'%}">-->
+<!--								<img src="{% static 'assets/img/logo2.png' %}" alt="">-->
+<!--							</a>-->
+<!--						</div>-->
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li class="current-list-item"><a href="{%url 'home_page'%}">Home</a>
+								</li>
+								<li><a href="{%url 'about_page'%}">About</a></li>
+								<li><a href="#">Cart <span style="background: red; color: white; padding: 5px 10px; border-radius: 50%;">
+        {{x}}
+    </span></a>
+									<ul class="sub-menu">
+										<li><a href="{%url 'cart_page'%}">Cart</a></li>
+										<li><a href="{%url 'checkout_page'%}">Check Out</a></li>
+									</ul>
+								</li>
+								<li><a href="news.html">Categories</a>
+									<ul class="sub-menu">
+											{%for i in categories %}
+											<li><a href="{% url 'filter_items' cat_name=i.Category_Name%}">{{i.Category_Name}}</a><li>
+											{%endfor%}
+									</ul>
+								</li>
+								<li><a href="{%url 'contact_page'%}">Contact</a></li>
+								<li><a href="{%url 'product_page'%}">Menu</a>
+									<ul class="sub-menu">
+										<li><a href="{%url 'product_page'%}">Menu</a></li>
+										<li><a href="{%url 'checkout_page'%}">Check Out</a></li>
+										<li><a href="{%url 'cart_page'%}">Cart</a></li>
+									</ul>
+								</li>
+								{% if request.session.Username %}
+								<li>
+									<a href="{% url 'sign_in' %}">Welcome : {{ request.session.Username }} / Logout</a>
+								</li>
+							{% else %}
+								<ul class="sub-menu">
+									<li><a href="{% url 'sign_up' %}">Sign up</a></li>
+								</ul>
+								 <a class="dropdown-item" href="{%url 'user_logout'%}">
+									<i class="typcn typcn-power text-primary"></i>
+									Logout
+									</a>
+							{% endif %}
+
+								<li>
+									<div class="header-icons">
+										<a class="shopping-cart" href="{%url 'cart_page'%}"><i class="fas fa-shopping-cart"></i></a>
+										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+									</div>
+								</li>
+							</ul>
+						</nav>
+						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search area -->
+
+	<!-- hero area -->
+	<div class="hero-area"
+     style="background-image: url({%static 'assets/img/home.jpg' %});
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+                        <p class="subtitle">INDIAN RESTAURANT</p>
+                        <h1>SWAAD</h1>
+                        <div class="hero-btns">
+                            <a href="{% url 'product_page' %}" class="boxed-btn">Menu</a>
+                            <a href="{% url 'contact_page' %}" class="bordered-btn">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- end hero area -->
+
+	<!-- features list section -->
+	<div class="list-section pt-80 pb-80">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-shipping-fast"></i>
+						</div>
+						<div class="content">
+							<h3>Free Shipping</h3>
+							<p>When order over $75</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-phone-volume"></i>
+						</div>
+						<div class="content">
+							<h3>24/7 Support</h3>
+							<p>Get support all day</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="list-box d-flex justify-content-start align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-sync"></i>
+						</div>
+						<div class="content">
+							<h3>Free Cancel</h3>
+							<p>Cancel food within 1 hour ,then no pay</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end features list section -->
+
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">
+						<h3><span class="orange-text">Our</span> Categories</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<ul style="display: flex; list-style-type: none; padding: 0; justify-content: center;">
+						{% for i in categories %}
+							<li style="margin-right: 20px; color: orange; font-weight: bold;">
+								<a href="#" style="color: orange; text-decoration: none; font-weight: bold;">{{ i.Category_Name }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+
+
+					</div>
+				</div>
+			</div>
+<div class="row">
+    {% for i in categories %}
+    <div class="col-lg-4 col-md-6 text-center">
+        <div class="single-product-item" style="height: auto; width: 100%; display: flex; flex-direction: column;">
+            <!-- Increased the height of the image -->
+            <div class="product-image" style="height: 300px; overflow: hidden;">
+                <a href="single-product.html">
+                    <img src="{{ i.cat_profile.url }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                </a>
+            </div>
+            <h3>{{ i.Category_Name }}</h3>
+            <!-- Decrease the width of the "Add to Cart" button -->
+            <a href="{% url 'filter_items' cat_name=i.Category_Name%}" class="cart-btn" style="font-size: 12px; padding: 6px 12px; width: auto; display: inline-block; margin-top: 10px;margin-left:100px;margin-right:100px;">
+                <i class="fas fa-shopping-cart"></i> view Details
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+		</div>
+	</div>
+	<!-- end product section -->
+
+	<!-- cart banner section -->
+	<section class="cart-banner pt-100 pb-100">
+    	<div class="container">
+        	<div class="row clearfix">
+            	<!--Image Column-->
+            	<div class="image-column col-lg-6">
+                	<div class="image">
+                    	<div class="price-box">
+                        	<div class="inner-price">
+                                <span class="price">
+                                    <strong>30%</strong> <br> full
+                                </span>
+                            </div>
+                        </div>
+                    	<img src="{% static 'assets/img/mandi.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--Content Column-->
+                <div class="content-column col-lg-6">
+					<h3><span class="orange-text">Deal</span> of the month</h3>
+                    <h4>Kuzhi Mandi</h4>
+                    <div class="text">Enjoy a delicious Full Kuzhimandi for just Rs. 599! Perfectly cooked, aromatic, and bursting with flavors, it's the ultimate treat for food lovers. Don't miss out – grab yours today</div>
+                    <!--Countdown Timer-->
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                	<a href="#" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end cart banner section -->
+
+	<!-- testimonail-section -->
+	<!-- end testimonail-section -->
+
+	<!-- advertisement section -->
+	<div class="abt-section mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<div class="abt-bg">
+						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<div class="abt-text">
+						<p class="top-sub">Since Year 1999</p>
+						<h2>We are <span class="orange-text">SWAAD</span></h2>
+						<p>Welcome to <strong>Swaad Restaurant</strong>, where authentic flavors meet exceptional quality! Experience a delightful journey of taste with our carefully crafted dishes that blend tradition and innovation. Every bite tells a story of passion and perfection.</p>
+                        <p>At <strong>Swaad Restaurant</strong>, we pride ourselves on serving the finest cuisine with a warm and inviting ambiance. Whether you're here for a casual meal or a special celebration, Swaad is the perfect destination for all food lovers. Come and savor the true taste of happiness!</p>
+
+						<a href="{%url 'about_page'%}" class="boxed-btn mt-4">know more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end advertisement section -->
+
+	<!-- shop banner -->
+	<section class="shop-banner">
+    	<div class="container" style="margin-left:100px;">
+        	<h3>Festive Feast is Here! <br> Enjoy Big <span class="orange-text">Discounts...</span></h3>
+<div class="sale-percent"><span>Offer! <br> Upto</span>50% <span>off</span> on Selected Dishes</div>
+
+            <a href="{%url 'product_page'%}" class="cart-btn btn-lg">Shop Now</a>
+        </div>
+    </section>
+	<!-- end shop banner -->
+
+	<!-- latest news -->
+<!--	<div class="latest-news pt-150 pb-150">-->
+<!--		<div class="container">-->
+
+<!--			<div class="row">-->
+<!--				<div class="col-lg-8 offset-lg-2 text-center">-->
+<!--					<div class="section-title">-->
+<!--						<h3><span class="orange-text">Our</span> News</h3>-->
+<!--						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+
+<!--			<div class="row">-->
+<!--				<div class="col-lg-4 col-md-6">-->
+<!--					<div class="single-latest-news">-->
+<!--						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>-->
+<!--						<div class="news-text-box">-->
+<!--							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>-->
+<!--							<p class="blog-meta">-->
+<!--								<span class="author"><i class="fas fa-user"></i> Admin</span>-->
+<!--								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>-->
+<!--							</p>-->
+<!--							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>-->
+<!--							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="col-lg-4 col-md-6">-->
+<!--					<div class="single-latest-news">-->
+<!--						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>-->
+<!--						<div class="news-text-box">-->
+<!--							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>-->
+<!--							<p class="blog-meta">-->
+<!--								<span class="author"><i class="fas fa-user"></i> Admin</span>-->
+<!--								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>-->
+<!--							</p>-->
+<!--							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>-->
+<!--							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">-->
+<!--					<div class="single-latest-news">-->
+<!--						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>-->
+<!--						<div class="news-text-box">-->
+<!--							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>-->
+<!--							<p class="blog-meta">-->
+<!--								<span class="author"><i class="fas fa-user"></i> Admin</span>-->
+<!--								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>-->
+<!--							</p>-->
+<!--							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>-->
+<!--							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="row">-->
+<!--				<div class="col-lg-12 text-center">-->
+<!--					<a href="news.html" class="boxed-btn">More News</a>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--	&lt;!&ndash; end latest news &ndash;&gt;-->
+
+	<!-- logo carousel -->
+	<div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="{% static 'assets/img/company-logos/1.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="{% static 'assets/img/company-logos/2.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="{% static 'assets/img/company-logos/3.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="{% static 'assets/img/company-logos/4.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="{% static 'assets/img/company-logos/5.png' %}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end logo carousel -->
+
+	<!-- footer -->
+	<div class="footer-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box about-widget">
+						<h2 class="widget-title">About us</h2>
+						<p>At <strong>Swaad Restaurant</strong>, we are committed to providing an exceptional dining experience. Our chefs create mouth-watering dishes with the finest ingredients, offering a blend of traditional and contemporary flavors. Whether you're here for a casual meal or a special occasion, we promise to make every moment memorable. Join us and taste the difference!</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box get-in-touch">
+						<h2 class="widget-title">Get in Touch</h2>
+						<ul>
+							<li>kakkandu, kochi, Kerala.</li>
+							<li>support@swaad.com</li>
+							<li>+91 8877 0989 11</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box pages">
+						<h2 class="widget-title">Pages</h2>
+						<ul>
+							<li><a href="{%url 'home_page'%}">Home</a></li>
+							<li><a href="{% url 'about_page'%}">About</a></li>
+							<li><a href="{%url 'product_page'%}">Shop</a></li>
+							<li><a href="{%url 'contact_page'%}">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box subscribe">
+						<h2 class="widget-title">Subscribe</h2>
+						<p>Subscribe to our mailing list to get the latest updates.</p>
+						<form action="index.html">
+							<input type="email" placeholder="Email">
+							<button type="submit"><i class="fas fa-paper-plane"></i></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end footer -->
+
+	<!-- copyright -->
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<p>Copyrights &copy; 2025 - <a href="">Gopika Santhosh</a>,  All Rights Reserved.<br>
+					</p>
+				</div>
+				<div class="col-lg-6 text-right col-md-12">
+					<div class="social-icons">
+						<ul>
+							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end copyright -->
+
+	<!-- jquery -->
+	<script src="{% static 'assets/js/jquery-1.11.3.min.js' %}"></script>
+	<!-- bootstrap -->
+	<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+	<!-- count down -->
+	<script src="{% static 'assets/js/jquery.countdown.js' %}"></script>
+	<!-- isotope -->
+	<script src="{% static 'assets/js/jquery.isotope-3.0.6.min.js' %}"></script>
+	<!-- waypoints -->
+	<script src="{% static 'assets/js/waypoints.js' %}"></script>
+	<!-- owl carousel -->
+	<script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+	<!-- magnific popup -->
+	<script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+	<!-- mean menu -->
+	<script src="{% static 'assets/js/jquery.meanmenu.min.js' %}"></script>
+	<!-- sticker js -->
+	<script src="{% static 'assets/js/sticker.js' %}"></script>
+	<!-- main js -->
+	<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == "success" %}
+        <script>
+            swal("{{ i }}", "", "success");
+        </script>
+        {% elif i.tags == "error" %}
+        <script>
+            swal("{{ i }}", "", "error");
+        </script>
+        {% elif i.tags == "warning" %}
+        <script>
+            swal("{{ i }}", "", "warning");
+        </script>
+        {% else %}
+        <script>
+            swal("{{ i }}", "", "info");
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>
