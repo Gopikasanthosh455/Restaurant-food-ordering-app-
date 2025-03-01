@@ -166,7 +166,7 @@
 						</div>
 						<h3>{{i.Product_name}}</h3>
 						<h5>Rs.{{i.Price}}</h5>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<a href="{%url 'single_items' item_id=i.id%}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
                 {%endfor%}
